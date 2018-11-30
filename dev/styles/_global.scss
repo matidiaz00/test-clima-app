@@ -1,0 +1,41 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    position: relative;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+h1 {
+	font-size: $title-base-size;
+	@include media-breakpoint-up(sm) {
+		font-size: 72px;
+	}
+}
+
+h2,
+h3 {
+	font-size: $title-base-size;
+	@include media-breakpoint-up(sm) {
+		font-size: 48px;
+	}
+}
+
+.btn {
+    text-transform: uppercase;
+    &:hover {
+        text-decoration: none;
+    }
+    &.btn-link {
+        text-transform: unset;
+    }
+    &.btn-outline-white {
+        @include button-outline-variant($white, $primary, $white, $white);
+    }
+    &.disabled,
+    &:disabled {
+        opacity: 1;
+    }
+}
