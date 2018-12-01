@@ -41,6 +41,16 @@ export function setSigleLocationData(array, cityId) {
                   (i === "82") ? "fas fa-cloud-rain" : //Lluvia en la mañana
                   (i === "67") ? "fas fa-smog" : //Nublado
                   "fas fa-question",
+            bg: (i === "66") ? "cloud-sun" : //Parcialmente nublado
+                (i === "85") ? "sun" : //Soleado
+                (i === "65") ? "sun" : //Mayormente soleado
+                (i === "70") ? "sun" : //Niebla por la mañana / Sol por la tarde
+                (i === "87") ? "cloud-rain" : //Aguaceros por la tarde
+                (i === "96") ? "sun" : //Tormentas dispersas
+                (i === "78") ? "sun" : //Soleado / Viento
+                (i === "82") ? "cloud-rain" : //Lluvia en la mañana
+                (i === "67") ? "sun" : //Nublado
+                "cloud",
             HiTempF: obj.HiTempF,
             LowTempF: obj.LowTempF,
             HiTempC: obj.HiTempC,

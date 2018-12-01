@@ -1,10 +1,12 @@
-const http = require('http');
-const app = require('./server/app');
+var http = require('http');
+var app = require('./server/app');
 
-const port = process.env.PORT || 8081;
+var port = process.env.PORT || 8082;
 
-const server = http.createServer(app);
+var server = http.createServer(app);
 
-server.listen(port, () => {
-    console.log("Open 'http://localhost:" + port + "/' in the browser for see the app (only if evoirment is 'prod', else if 'dev' add '/api/all').");
+server.listen(port, function() {
+    console.log("Follow the instructions below to see the web app");
+    console.log("If evoirment is 'prod' open 'http://localhost:" + port + "/' in the browser");
+    console.log("If evoirment is 'dev' open 'http://localhost:" + port + "/api/all' in the browser");
 });

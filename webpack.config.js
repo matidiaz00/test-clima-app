@@ -2,7 +2,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
-var Path = require('path');
+var path = require('path');
 
 module.exports = {
     mode: 'none',
@@ -10,26 +10,18 @@ module.exports = {
         main: './dev/index.js'
     },
     output: {
-        path: Path.resolve(__dirname, 'prod/'),
+        path: path.resolve(__dirname, 'prod/'),
         filename: 'javascript.js'
     },
     devServer: {
-        contentBase: Path.join(__dirname, '/prod/'),
+        contentBase: path.join(__dirname, '/prod/'),
         watchContentBase: true,
         port: 3030,
         compress: true,
-        /*
-        proxy: [
-            {
-                context: ['/api', '/api/all', '/api/locations', '/api/singlelocation/:city'],
-                target: 'http://localhost:8081'
-            }
-        ]
-        */
         proxy: [
             {
                 context: ['/api/**'],
-                target: 'http://localhost:8081',
+                target: 'http://localhost:8082',
                 secure: false
             }
         ]
@@ -47,6 +39,25 @@ module.exports = {
                     fallback: 'style-loader',
                     use: ['css-loader', 'sass-loader']
                 })
+            },
+            {
+                test: /\.(jp(e*)g|svg)$/,  
+                use: [{
+                    loader: 'url-loader',
+                    options: { 
+                        limit: 8000,
+                        name: 'assets/[name].[ext]'
+                    } 
+                }]
+            },
+            {
+                test: /\.(png|mp4)$/,
+                use: [{
+                    loader: 'file-loader',
+                    options: {
+                        name: 'assets/[name].[ext]'
+                    }
+                }]
             }
         ]
     },

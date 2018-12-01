@@ -1,14 +1,20 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 class DayList extends React.Component {
     constructor(props) {
         super(props);
-
+        this.state = {
+            active: 0
+        };
         this.handleClick = this.handleClick.bind(this);
     }
-    handleClick(event, value) {
+    handleClick = (event, DayNumber, bg, index) => {
         event.preventDefault();
-        this.props.handleSelectDay(value);
+        this.setState({
+            active: index
+        });
+        this.props.handleSelectDay(DayNumber, bg);
     };
     render() {
         return (
@@ -17,9 +23,9 @@ class DayList extends React.Component {
                     {
                         this.props.singleLocation.slice(0, 6).map((city, index) =>
                             <li 
-                                onClick={() => this.handleClick(event, city.DayNumber)} 
+                                onClick={() => this.handleClick(event, city.DayNumber, city.bg, index)} 
                                 key={index} 
-                                className="d-flex flex-column align-items-center flex-wrap"
+                                className={"d-flex flex-column align-items-center flex-wrap" + ((index === this.state.active) ? ' active' : '')}
                             >
                                 <span className="mb-auto font-weight-bold text-uppercase">
                                     {city.Day}
@@ -48,5 +54,8 @@ class DayList extends React.Component {
             </section>
         );
     }
-}
+};
+DayList.propTypes = {
+    handleClick: PropTypes.func
+};
 export default DayList;

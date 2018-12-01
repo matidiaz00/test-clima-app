@@ -1,0 +1,16 @@
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+
+# sass
+/.sass-cache
+
+# git
+/.git
+
+# Production
+/prod
+
+# package lock
+package-lock.json

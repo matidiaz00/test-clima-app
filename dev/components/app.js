@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Header from "./header";
 import MainCircle from "./maincircle";
 import DayList from "./daylist";
@@ -20,14 +21,14 @@ class App extends React.Component {
             country: '',
             degrees: '',
             cityId: '',
-            selectDay: 0
+            selectDay: 0,
+            bgcolor: ''
         };
         this.handleForm = this.handleForm.bind(this);
         this.handleSelectDay = this.handleSelectDay.bind(this);
         this.toggleMenu = this.toggleMenu.bind(this);
     };
-
-    componentDidMount() {
+    componentDidMount = () => {
         fetch("/api/all")
             .then(res => {
                 return res.json();
@@ -46,14 +47,12 @@ class App extends React.Component {
                 });
             });
     };
-
-    toggleMenu(value) {
+    toggleMenu = (value) => {
         this.setState({
             menuOpen: value
         });
     };
-
-    handleForm(data) {
+    handleForm = (data) => {
         this.setState({
             country: data.country,
             degrees: data.degrees,
@@ -61,18 +60,15 @@ class App extends React.Component {
             singleLocation: setSigleLocationData(this.state.dataAPI, data.cityId)
         });
     };
-
-    handleSelectDay(data) {
+    handleSelectDay = (day, bg) => {
         this.setState({
-            selectDay: Number(data)
+            selectDay: Number(day),
+            bgcolor: bg
         });
     };
-
     render() {
         let className = 'cloud-rain container h-100 d-flex flex-column align-items-center flex-wrap';
-        if (this.state.menuOpen === true) {
-            className += ' menuOpen';
-        };
+        (this.state.menuOpen === true) ? className += ' menuOpen' : '';
         const { error, isLoaded, menuOpen } = this.state;
         if (error) {
             return (
@@ -86,13 +82,16 @@ class App extends React.Component {
             return (
                 <div id="main-wrapper" className="container h-100 d-flex flex-column align-items-center flex-wrap">
                     <div className="my-auto w-100 py-4 d-flex flex-column align-items-start flex-wrap">
-                        <h3 className="text-center w-100 my-auto">Cargando...</h3>
+                        <h3 className="text-center w-100 my-auto">
+                            <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
+                        </h3>
                     </div>
                 </div>
             )
         } else if (!menuOpen) {
             return (
                 <div id="main-wrapper" className={className}>
+                    <div id="background" className={this.state.bgcolor}></div>
                     <Header
                         singleLocation={this.state.singleLocation} 
                         country={this.state.country} 
@@ -123,6 +122,7 @@ class App extends React.Component {
         } else {
             return (
                 <div id="main-wrapper" className={className}>
+                    <div id="background" className={this.state.bgcolor}></div>
                     <Form 
                         locations={this.state.locations} 
                         handleForm={this.handleForm} />
@@ -130,6 +130,22 @@ class App extends React.Component {
             );
         }
     }
-}
-
+};
+App.propTypes = {
+    error: PropTypes.object,
+    isLoaded: PropTypes.bool,
+    ifMiniCFooter: PropTypes.bool,
+    menuOpen: PropTypes.bool,
+    dataAPI: PropTypes.array,
+    locations: PropTypes.array,
+    singleLocation: PropTypes.array,
+    country: PropTypes.string,
+    degrees: PropTypes.string,
+    cityId: PropTypes.string,
+    selectDay: PropTypes.number,
+    handleForm: PropTypes.func,
+    handleSelectDay: PropTypes.func,
+    toggleMenu: PropTypes.func,
+    bgcolor: PropTypes.string
+};
 export default App;

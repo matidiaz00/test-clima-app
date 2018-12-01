@@ -9,7 +9,7 @@
     }
     .react-autosuggest__suggestions-container {
         overflow-y: scroll;
-        max-height: 300px;
+        max-height: 250px;
         display: none;
         &.react-autosuggest__suggestions-container--open {
             display: block;
@@ -17,6 +17,7 @@
             top: 51px;
             width: 100%;
             background-color: $white;
+            border: 1px solid $white;
             z-index: 2;
         }
         .react-autosuggest__suggestions-list {

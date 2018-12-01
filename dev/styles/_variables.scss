@@ -1,29 +1,6 @@
-/*
-$spacer: 40px !default;
-$spacers: () !default;
-$spacers: map-merge(
-  (
-    0: 0,
-    1: -($spacer * 2),
-    2: -$spacer,
-    3: $spacer,
-    4: ($spacer * 2),
-    5: ($spacer * 3)
-  ),
-  $spacers
-);
-
-$grid-gutter-width: 80px !default;
-*/
-
 $primary:       #2885ca !default;
-//$info:     		  #22b5cb !default;
-//$success:     	#9bcb50 !default;
-//$light:         #c5c5c5 !default;
 $dark:          #636363 !default;
 $white:         #ffffff !default;
-
-//$font-family-base: 'Montserrat', sans-serif !default;
 
 $body-bg:                   $primary !default;
 $body-color:                $white !default;

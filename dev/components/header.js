@@ -6,8 +6,8 @@ class Header extends React.Component {
         super();
         this.handleMenuClick = this.handleMenuClick.bind(this);
     };
-    handleMenuClick(e) {
-        e.preventDefault();
+    handleMenuClick = (event) => {
+        event.preventDefault();
         this.props.toggleMenu(!this.props.menuOpen);
     };
     render() {
