@@ -2,6 +2,6 @@
 
 Demo: https://test-ecolon.herokuapp.com/
 
-`npm install install`
+`npm install`
 
 `npm run dev`
